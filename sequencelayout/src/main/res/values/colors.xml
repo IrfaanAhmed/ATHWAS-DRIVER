@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="default_progress_background">#ededed</color>
+    <color name="dark_pink">#990099</color>
+</resources>

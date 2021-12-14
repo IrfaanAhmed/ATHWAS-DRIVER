@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#9AB83D</color>
+    <color name="colorPrimaryDark">#728A2E</color>
+    <color name="colorAccent">#382B91</color>
+
+    <color name="trans_primary">#F6FFDC</color>
+    <color name="white">#FFFFFF</color>
+    <color name="light_blue">#F6FAFD</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="out_of_stock_trans">#99000000</color>
+    <color name="light_grey">#afb1b3</color>
+    <color name="grey">#F6F6F6</color>
+    <color name="very_light_grey">#DBDBDB</color>
+    <color name="green">#009937</color>
+    <color name="dark_grey">#3c3f41</color>
+    <color name="tab_unselected_color">#b6b6b6</color>
+    <color name="tab_selected_color">#083f5e</color>
+    <color name="separator">#dfdfdf</color>
+    <color name="button_disable">#ACDCC3</color>
+    <color name="red">#D50000</color>
+    <color name="pink">#F84770</color>
+    <color name="sky_blue">#21ADEB</color>
+    <color name="dark_green">#508415</color>
+    <color name="unselect_tab_text">#5B92D4</color>
+</resources>

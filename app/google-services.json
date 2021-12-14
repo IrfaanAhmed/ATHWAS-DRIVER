@@ -1,0 +1,107 @@
+{
+  "project_info": {
+    "project_number": "544469837523",
+    "firebase_url": "https://athwas-294012.firebaseio.com",
+    "project_id": "athwas-294012",
+    "storage_bucket": "athwas-294012.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:544469837523:android:94a0cdf52f6b14a12fd626",
+        "android_client_info": {
+          "package_name": "com.app.ia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "544469837523-73jbbnajo7l2og9pn680c17cuo4o7b1u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.ia",
+            "certificate_hash": "dfafda98ba534d4142afc954df3feabe2b411aaa"
+          }
+        },
+        {
+          "client_id": "544469837523-gn699q9ruadr571ug0v7gkd4vlvad5s9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.ia",
+            "certificate_hash": "32156eb04f28f10692f00ebb1e5067b1bdb593a4"
+          }
+        },
+        {
+          "client_id": "544469837523-8s6nslobghsfkhdte7qn8rk5osvf34vo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFJHk8eS-7Dd5mH94CaNa6vhTjgvGZIe8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "544469837523-8s6nslobghsfkhdte7qn8rk5osvf34vo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "544469837523-583huoe7dkvqp1jqi3vogu5uugst961s.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.app.athwas"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:544469837523:android:68ceb1423a3c303b2fd626",
+        "android_client_info": {
+          "package_name": "com.app.ia.driver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "544469837523-o5aj2qg8b50r6a0csb603hvh8go753dp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.ia.driver",
+            "certificate_hash": "85f1bb8d35b3b02cd06568c9c8a1f198d685abe0"
+          }
+        },
+        {
+          "client_id": "544469837523-8s6nslobghsfkhdte7qn8rk5osvf34vo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFJHk8eS-7Dd5mH94CaNa6vhTjgvGZIe8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "544469837523-8s6nslobghsfkhdte7qn8rk5osvf34vo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "544469837523-583huoe7dkvqp1jqi3vogu5uugst961s.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.app.athwas"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

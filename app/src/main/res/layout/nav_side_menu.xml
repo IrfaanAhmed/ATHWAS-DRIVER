@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.login.LoginActivity">
+
+    <data>
+
+        <import type="com.app.ia.driver.R" />
+
+        <import type="android.view.View"/>
+
+        <variable
+            name="viewModel"
+            type="com.app.ia.driver.ui.home.HomeMainViewModel" />
+    </data>
+
+    <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivProfile"
+            defaultImage="@{R.drawable.user_place_holder_image}"
+            imageUrl="@{viewModel.userImage}"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_70sdp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_35sdp"
+            android:scaleType="centerCrop"
+            app:civ_border_color="@color/colorAccent"
+            app:civ_border_width="@dimen/_1sdp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvUserName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.userName}"
+            android:textColor="@color/colorAccent"
+            android:fontFamily="@font/linotte_bold"
+            android:layout_below="@+id/ivProfile"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:textSize="@dimen/_13sdp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recViewNavigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_below="@+id/tvUserName"
+            tools:listitem="@layout/side_menu_list_item"
+            tools:itemCount="3"
+            android:layout_marginTop="@dimen/_20sdp"/>
+
+    </RelativeLayout>
+
+</layout>
