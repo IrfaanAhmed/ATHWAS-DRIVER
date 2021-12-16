@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.text.TextUtils
 import android.util.Patterns
+import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.MutableLiveData
@@ -63,29 +64,36 @@ class ResetPasswordViewModel(private val baseRepository: BaseRepository) : BaseV
     fun onResetClick() {
         val newPassword = mBinding.edtTextNewPassword.text.toString()
         val confirmPassword = mBinding.edtTextConfirmPassword.text.toString()
+        mBinding.cardEdtTextConfirmPassword.error=null
+        mBinding.cardEdtTextConfirmPassword.isErrorEnabled=false
+        mBinding.cardEdtTextNewPassword.error=null
+        mBinding.cardEdtTextNewPassword.isErrorEnabled=false
+        mBinding.pinviewError.visibility= View.GONE
 
         if (mBinding.pinView.text!!.isEmpty()) {
-            DriverDialog(mActivity, mActivity.getString(R.string.please_enter_otp), true)
+//            DriverDialog(mActivity, mActivity.getString(R.string.please_enter_otp), true)
+            mBinding.pinviewError.text=mActivity.getString(R.string.please_enter_otp)
+            mBinding.pinviewError.visibility= View.VISIBLE
+
         } else if (mBinding.pinView.text!!.toString() != otp.value!!) {
-            DriverDialog(mActivity, mActivity.getString(R.string.please_enter_valid_otp), true)
+//            DriverDialog(mActivity, mActivity.getString(R.string.please_enter_valid_otp), true)
+            mBinding.pinviewError.text=mActivity.getString(R.string.please_enter_valid_otp)
+            mBinding.pinviewError.visibility= View.VISIBLE
         } else if (newPassword.isEmpty()) {
-            DriverDialog(mActivity, mActivity.getString(R.string.please_enter_new_password), true)
+//            DriverDialog(mActivity, mActivity.getString(R.string.please_enter_new_password), true)
+            mBinding.cardEdtTextNewPassword.error=mActivity.getString(R.string.please_enter_new_password)
         } else if (newPassword.length < 6 || newPassword.length > 15) {
-            DriverDialog(mActivity, mActivity.getString(R.string.new_password_validation_msg), true)
+//            DriverDialog(mActivity, mActivity.getString(R.string.new_password_validation_msg), true)
+            mBinding.cardEdtTextNewPassword.error=mActivity.getString(R.string.new_password_validation_msg)
         } else if (confirmPassword.isEmpty()) {
-            DriverDialog(mActivity, mActivity.getString(R.string.enter_conform_password), true)
+//            DriverDialog(mActivity, mActivity.getString(R.string.enter_conform_password), true)
+            mBinding.cardEdtTextConfirmPassword.error=mActivity.getString(R.string.enter_conform_password)
         } else if (confirmPassword.length < 6 || confirmPassword.length > 15) {
-            DriverDialog(
-                mActivity,
-                mActivity.getString(R.string.confirm_password_validation_msg),
-                true
-            )
+//            DriverDialog(mActivity, mActivity.getString(R.string.confirm_password_validation_msg), true)
+            mBinding.cardEdtTextConfirmPassword.error=mActivity.getString(R.string.confirm_password_validation_msg)
         } else if (confirmPassword != newPassword) {
-            DriverDialog(
-                mActivity,
-                mActivity.getString(R.string.confirm_new_matched_validation_msg),
-                true
-            )
+//            DriverDialog(mActivity, mActivity.getString(R.string.confirm_new_matched_validation_msg), true)
+            mBinding.cardEdtTextConfirmPassword.error=mActivity.getString(R.string.confirm_new_matched_validation_msg)
         } else {
             val requestParams = HashMap<String, String>()
             requestParams["country_code"] = "+${countryCode.value!!}"

@@ -31,15 +31,23 @@ class ChangePasswordViewModel(private val baseRepository: BaseRepository) : Base
         val newPassword = mBinding.edtTextNewPassword.text.toString()
         val confirmPassword = mBinding.edtTextConfirmPassword.text.toString()
 
+        mBinding.tiledtedtTextNewPassword.error=null
+        mBinding.tiledtedtTextNewPassword.isErrorEnabled=false
+
+        mBinding.tiledtTextConfirmPassword.error=null
+        mBinding.tiledtTextConfirmPassword.isErrorEnabled = false
+
         when {
             /*oldPassword.length < 6 || oldPassword.length > 20 -> {
                 IADialog(mActivity, mActivity.getString(R.string.password_should_be_min_6_char), true)
             }*/
             newPassword.contains(" ") -> {
-                DriverDialog(mActivity, mActivity.getString(R.string.invalid_password_format), true)
+//                DriverDialog(mActivity, mActivity.getString(R.string.invalid_password_format), true)
+                mBinding.tiledtedtTextNewPassword.error=mActivity.getString(R.string.invalid_password_format)
             }
             newPassword.length < 6 || newPassword.length > 20 -> {
-                DriverDialog(mActivity, mActivity.getString(R.string.password_should_be_min_6_char), true)
+//                DriverDialog(mActivity, mActivity.getString(R.string.password_should_be_min_6_char), true)
+                mBinding.tiledtedtTextNewPassword.error=mActivity.getString(R.string.password_should_be_min_6_char)
             }
             /*newPassword.isEmpty() -> {
                 IADialog(mActivity, mActivity.getString(R.string.please_enter_new_password), true)
@@ -54,7 +62,8 @@ class ChangePasswordViewModel(private val baseRepository: BaseRepository) : Base
                 IADialog(mActivity, mActivity.getString(R.string.password_should_be_min_6_char), true)
             }*/
             confirmPassword != newPassword -> {
-                DriverDialog(mActivity, mActivity.getString(R.string.confirm_password_should_be_same_as_new_password), true)
+//                DriverDialog(mActivity, mActivity.getString(R.string.confirm_password_should_be_same_as_new_password), true)
+                mBinding.tiledtTextConfirmPassword.error=mActivity.getString(R.string.confirm_password_should_be_same_as_new_password)
             }
             else -> {
                 val requestParams = HashMap<String, String>()

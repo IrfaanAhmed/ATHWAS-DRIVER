@@ -65,10 +65,15 @@ class MyProfileViewModel(private val baseRepository: BaseRepository) : BaseViewM
         mBinding.edtTextName.setText(mBinding.edtTextName.text.toString().trim())
         val name = mBinding.edtTextName.text.toString()
 
+        mBinding.cardEdtTextName.error=null
+        mBinding.cardEdtTextName.isErrorEnabled=false
+
         if (name.length < 3 || name.length > 30) {
-            DriverDialog(mActivity, mActivity.getString(R.string.name_validation_msg), true)
+//            DriverDialog(mActivity, mActivity.getString(R.string.name_validation_msg), true)
+            mBinding.cardEdtTextName.error=mActivity.getString(R.string.name_validation_msg)
         } else if (ValidationUtils.isHaveLettersOnly(name)) {
-            DriverDialog(mActivity, mActivity.getString(R.string.name_valid_msg), true)
+//            DriverDialog(mActivity, mActivity.getString(R.string.name_valid_msg), true)
+            mBinding.cardEdtTextName.error=mActivity.getString(R.string.name_valid_msg)
         } else {
             val requestParams = HashMap<String, String>()
             requestParams["field_key"] = "username"
@@ -81,10 +86,15 @@ class MyProfileViewModel(private val baseRepository: BaseRepository) : BaseViewM
     fun updateVehicleNumber() {
         val vehicleNumber = mBinding.edtTextVehicleNumber.text.toString()
 
+        mBinding.cardEdtTextVehicleNumber.error=null
+        mBinding.cardEdtTextVehicleNumber.isErrorEnabled=false
+
         if (vehicleNumber.isEmpty()) {
-            DriverDialog(mActivity, mActivity.getString(R.string.please_enter_vehicle_number), true)
+//            DriverDialog(mActivity, mActivity.getString(R.string.please_enter_vehicle_number), true)
+            mBinding.cardEdtTextVehicleNumber.error=mActivity.getString(R.string.please_enter_vehicle_number)
         } else if (vehicleNumber.length < 2 || vehicleNumber.length > 15) {
-            DriverDialog(mActivity, mActivity.getString(R.string.vehicle_number_validation_msg), true)
+//            DriverDialog(mActivity, mActivity.getString(R.string.vehicle_number_validation_msg), true)
+            mBinding.cardEdtTextVehicleNumber.error=mActivity.getString(R.string.vehicle_number_validation_msg)
         } else {
             val requestParams = HashMap<String, String>()
             requestParams["field_key"] = "vehicle_no"

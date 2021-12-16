@@ -77,23 +77,35 @@ class LoginViewModel(private val baseRepository: BaseRepository) : BaseViewModel
         val mobileNumber = mBinding.edtTextMobileNumber.text.toString()
         val password = mBinding.edtTextPassword.text.toString()
 
+        mBinding.cardViewMobile.error=null
+        mBinding.cardViewMobile.isErrorEnabled=false
+        mBinding.cardViewPassword.error=null
+        mBinding.cardViewPassword.isErrorEnabled=false
+
         if (mobileNumber.isEmpty()) {
-            DriverDialog(mActivity, mActivity.getString(R.string.please_enter_email_or_mobile_number), true)
+//            DriverDialog(mActivity, mActivity.getString(R.string.please_enter_email_or_mobile_number), true)
+            mBinding.cardViewMobile.error=mActivity.getString(R.string.please_enter_email_or_mobile_number)
+
         } else if (isValidPhoneNumber(mobileNumber)) {
             if (mobileNumber.length < 7 || mobileNumber.length > 15) {
-                DriverDialog(mActivity, mActivity.getString(R.string.mobile_number_validation_msg), true)
+//                DriverDialog(mActivity, mActivity.getString(R.string.mobile_number_validation_msg), true)
+                mBinding.cardViewMobile.error=mActivity.getString(R.string.mobile_number_validation_msg)
             } else if (password.isEmpty()) {
-                DriverDialog(mActivity, mActivity.getString(R.string.enter_password), true)
+//                DriverDialog(mActivity, mActivity.getString(R.string.enter_password), true)
+                mBinding.cardViewPassword.error=mActivity.getString(R.string.enter_password)
             } else if (password.length < 6 || password.length > 15) {
-                DriverDialog(mActivity, mActivity.getString(R.string.password_validation_msg), true)
+//                DriverDialog(mActivity, mActivity.getString(R.string.password_validation_msg), true)
+                mBinding.cardViewPassword.error=mActivity.getString(R.string.password_validation_msg)
             } else {
                 submitLoginCredential(mobileNumber, password)
             }
         } else {
             if (!CommonUtils.isEmailValid(mobileNumber)) {
-                DriverDialog(mActivity, mActivity.getString(R.string.enter_valid_email_address), true)
+//                DriverDialog(mActivity, mActivity.getString(R.string.enter_valid_email_address), true)
+                mBinding.cardViewMobile.error=mActivity.getString(R.string.enter_valid_email_address)
             } else if (password.isEmpty()) {
-                DriverDialog(mActivity, mActivity.getString(R.string.enter_password), true)
+//                DriverDialog(mActivity, mActivity.getString(R.string.enter_password), true)
+                mBinding.cardViewPassword.error=mActivity.getString(R.string.enter_password)
             } else {
                 submitLoginCredential(mobileNumber, password)
             }
