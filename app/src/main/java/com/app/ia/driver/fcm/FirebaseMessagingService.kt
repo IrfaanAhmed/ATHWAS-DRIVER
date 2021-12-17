@@ -25,6 +25,9 @@ class FirebaseMessagingService : FirebaseMessagingService() {
 
         AppLogger.d("From : ${remoteMessage.from}")
 
+        AppLogger.d("Message Notification Body -------------------------------: ${remoteMessage.notification?.body}")
+        AppLogger.d("Message Notification Data Body -------------------------------: ${remoteMessage.data}")
+
         val notificationCount = AppPreferencesHelper.getInstance().notificationCount
         AppPreferencesHelper.getInstance().notificationCount = (notificationCount + 1)
 
@@ -43,13 +46,16 @@ class FirebaseMessagingService : FirebaseMessagingService() {
         }
 
         remoteMessage.data.isNotEmpty().let {
+            val redirectionId = if (remoteMessage.data["id"] != null) remoteMessage.data["id"] else ""
+            val redirectionType = if (remoteMessage.data["custom_message_type"] != null) remoteMessage.data["custom_message_type"] else ""
+            val title = if (remoteMessage.data["title"] != null) remoteMessage.data["title"] else ""
+            val body = if (remoteMessage.data["body"] != null) remoteMessage.data["body"] else ""
 
             when (remoteMessage.data["custom_message_type"]) {
-
-                NotificationType.NOTIFICATION_TYPE_ADMIN.notificationType -> redirectionNotification(remoteMessage)
-                NotificationType.NOTIFICATION_TYPE_ORDER_DETAIL.notificationType -> redirectionNotification(remoteMessage)
-                NotificationType.NOTIFICATION_TYPE_PRODUCT.notificationType -> redirectionNotification(remoteMessage)
-                NotificationType.NOTIFICATION_TYPE_ORDER_LIST.notificationType -> redirectionNotification(remoteMessage)
+                NotificationType.NOTIFICATION_TYPE_ADMIN.notificationType -> redirectionNotification(title!!, body!!, redirectionId!!, redirectionType!!)
+                NotificationType.NOTIFICATION_TYPE_ORDER_DETAIL.notificationType -> redirectionNotification(title!!, body!!, redirectionId!!, redirectionType!!)
+                NotificationType.NOTIFICATION_TYPE_PRODUCT.notificationType -> redirectionNotification(title!!, body!!, redirectionId!!, redirectionType!!)
+                NotificationType.NOTIFICATION_TYPE_ORDER_LIST.notificationType -> redirectionNotification(title!!, body!!, redirectionId!!, redirectionType!!)
                 else -> {
                     onlyNotification(remoteMessage)
                 }
@@ -93,6 +99,31 @@ class FirebaseMessagingService : FirebaseMessagingService() {
 
             val notificationHelper = NotificationHelper(this)
             notificationHelper.createNotification(remoteMessage.notification?.title!!, remoteMessage.notification?.body!!, HomeActivity::class.java, bundlePayloads)
+
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+
+    }
+
+    private fun redirectionNotification(title: String, message: String, redirectionId: String, redirectionType: String) {
+
+        try {
+
+            //val redirectionId = if (remoteMessage.data["id"] != null) remoteMessage.data["id"] else ""
+            //val redirection = remoteMessage.data["custom_message_type"]
+            val notificationIntent = Intent(this, HomeActivity::class.java)
+
+            val stackBuilder = TaskStackBuilder.create(this)
+            stackBuilder.addParentStack(HomeActivity::class.java)
+            stackBuilder.addNextIntent(notificationIntent)
+
+            val bundlePayloads = ArrayList<NotificationHelper.BundlePayload>()
+            bundlePayloads.add(NotificationHelper.BundlePayload(HomeActivity.KEY_REDIRECTION, redirectionType!!))
+            bundlePayloads.add(NotificationHelper.BundlePayload(HomeActivity.KEY_REDIRECTION_ID, redirectionId!!))
+
+            val notificationHelper = NotificationHelper(this)
+            notificationHelper.createNotification(title, message, HomeActivity::class.java, bundlePayloads)
 
         } catch (e: JSONException) {
             e.printStackTrace()
