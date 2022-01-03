@@ -20,7 +20,9 @@ import com.google.android.material.snackbar.Snackbar
 /**
  * Extension method to show toast for Context.
  */
-fun Context?.toast(text: CharSequence, duration: Int = Toast.LENGTH_LONG) = this?.let { Toast.makeText(it, text, duration).show() }
+fun Context?.toast(text: CharSequence, duration: Int = Toast.LENGTH_LONG) = this?.let {
+    Toast.makeText(it, text, duration).show()
+}
 
 
 /**

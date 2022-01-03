@@ -55,10 +55,10 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fillViewport="true"
-            android:scrollbars="none"
+            android:layout_below="@+id/toolbar"
             android:background="@color/white"
-            android:layout_below="@+id/toolbar">
+            android:fillViewport="true"
+            android:scrollbars="none">
 
 
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -70,47 +70,47 @@
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_35sdp"
-                    android:orientation="horizontal"
                     android:layout_marginTop="@dimen/_24sdp"
-                    android:background="@drawable/edittext_bg">
+                    android:background="@drawable/edittext_bg"
+                    android:orientation="horizontal">
 
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/edtTextEmail"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_gravity="center"
                         android:background="@null"
                         android:hint="@string/title"
                         android:inputType="text"
                         android:maxLength="12"
                         android:maxLines="1"
                         android:padding="@dimen/_10sdp"
-                        android:textSize="@dimen/_10sdp"
-                        android:layout_gravity="center" />
+                        android:textSize="@dimen/_10sdp" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_marginTop="@dimen/_24sdp"
-                    android:background="@drawable/edittext_bg">
+                    android:background="@drawable/edittext_bg"
+                    android:orientation="horizontal">
 
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/edtTextDescription"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_150sdp"
+                        android:layout_gravity="center"
                         android:background="@null"
+                        android:gravity="top"
                         android:hint="@string/enter_reason_here"
                         android:inputType="textMultiLine"
                         android:maxLength="12"
                         android:maxLines="1"
                         android:padding="@dimen/_10sdp"
-                        android:textSize="@dimen/_10sdp"
-                        android:layout_gravity="center"
-                        android:gravity="top"/>
+                        android:textSize="@dimen/_10sdp" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -119,10 +119,10 @@
                     style="@style/AddToCartButton"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_32sdp"
-                    android:background="@drawable/logout_button_bg"
-                    android:text="@string/submit"
                     android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/_12sdp" />
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:background="@drawable/logout_button_bg"
+                    android:text="@string/submit" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 

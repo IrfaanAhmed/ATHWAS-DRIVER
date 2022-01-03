@@ -26,112 +26,151 @@ class ChangePasswordViewModel(private val baseRepository: BaseRepository) : Base
         title.set(mActivity.getString(R.string.change_password_wo_))
     }
 
-    fun onChangePasswordClick(){
+    fun onChangePasswordClick() {
         val oldPassword = mBinding.edtTextOldPassword.text.toString()
         val newPassword = mBinding.edtTextNewPassword.text.toString()
         val confirmPassword = mBinding.edtTextConfirmPassword.text.toString()
 
-        mBinding.tiledtedtTextNewPassword.error=null
-        mBinding.tiledtedtTextNewPassword.isErrorEnabled=false
+        mBinding.tiledtedtTextNewPassword.error = null
+        mBinding.tiledtedtTextNewPassword.isErrorEnabled = false
 
-        mBinding.tiledtTextConfirmPassword.error=null
+        mBinding.tiledtTextConfirmPassword.error = null
         mBinding.tiledtTextConfirmPassword.isErrorEnabled = false
 
-        when {
-            /*oldPassword.length < 6 || oldPassword.length > 20 -> {
-                IADialog(mActivity, mActivity.getString(R.string.password_should_be_min_6_char), true)
-            }*/
-            newPassword.contains(" ") -> {
-//                DriverDialog(mActivity, mActivity.getString(R.string.invalid_password_format), true)
-                mBinding.tiledtedtTextNewPassword.error=mActivity.getString(R.string.invalid_password_format)
-            }
-            newPassword.length < 6 || newPassword.length > 20 -> {
-//                DriverDialog(mActivity, mActivity.getString(R.string.password_should_be_min_6_char), true)
-                mBinding.tiledtedtTextNewPassword.error=mActivity.getString(R.string.password_should_be_min_6_char)
-            }
-            /*newPassword.isEmpty() -> {
-                IADialog(mActivity, mActivity.getString(R.string.please_enter_new_password), true)
-            }
-            newPassword.length < 6 -> {
-                IADialog(mActivity, mActivity.getString(R.string.password_should_be_min_6_char), true)
-            }
-            confirmPassword.isEmpty() -> {
-                IADialog(mActivity, mActivity.getString(R.string.please_enter_confirm_password), true)
-            }
-            confirmPassword.length < 6 -> {
-                IADialog(mActivity, mActivity.getString(R.string.password_should_be_min_6_char), true)
-            }*/
-            confirmPassword != newPassword -> {
-//                DriverDialog(mActivity, mActivity.getString(R.string.confirm_password_should_be_same_as_new_password), true)
-                mBinding.tiledtTextConfirmPassword.error=mActivity.getString(R.string.confirm_password_should_be_same_as_new_password)
-            }
-            else -> {
-                val requestParams = HashMap<String, String>()
-                requestParams["old_password"] = oldPassword
-                requestParams["new_password"] = newPassword
-                changePasswordObserver(requestParams)
-            }
+        mBinding.tiledtedtTextOldPassword.error = null
+        mBinding.tiledtedtTextOldPassword.isErrorEnabled = false
+
+        /*  when {
+  //            oldPassword.length < 6 || oldPassword.length > 20 -> {
+  //                IADialog(mActivity, mActivity.getString(R.string.password_should_be_min_6_char), true)
+  //            }
+              newPassword.contains(" ") -> {
+  //                DriverDialog(mActivity, mActivity.getString(R.string.invalid_password_format), true)
+                  mBinding.tiledtedtTextNewPassword.error=mActivity.getString(R.string.invalid_password_format)
+              }
+              newPassword.length < 6 || newPassword.length > 20 -> {
+  //                DriverDialog(mActivity, mActivity.getString(R.string.password_should_be_min_6_char), true)
+                  mBinding.tiledtedtTextNewPassword.error=mActivity.getString(R.string.password_should_be_min_6_char)
+              }
+             newPassword.isEmpty() -> {
+                // IADialog(mActivity, mActivity.getString(R.string.please_enter_new_password), true)
+                 mBinding.tiledtedtTextNewPassword.error=mActivity.getString(R.string.please_enter_new_password)
+             }
+  //            newPassword.length < 6 -> {
+  //                IADialog(mActivity, mActivity.getString(R.string.password_should_be_min_6_char), true)
+  //            }
+             confirmPassword.isEmpty() -> {
+               //  IADialog(mActivity, mActivity.getString(R.string.please_enter_confirm_password), true)
+                 mBinding.tiledtTextConfirmPassword.error=mActivity.getString(R.string.please_enter_confirm_password)
+             }
+             confirmPassword.length < 6 -> {
+                // IADialog(mActivity, mActivity.getString(R.string.password_should_be_min_6_char), true)
+                 mBinding.tiledtTextConfirmPassword.error=mActivity.getString(R.string.password_should_be_min_6_char)
+             }
+              confirmPassword != newPassword -> {
+  //                DriverDialog(mActivity, mActivity.getString(R.string.confirm_password_should_be_same_as_new_password), true)
+                  mBinding.tiledtTextConfirmPassword.error=mActivity.getString(R.string.confirm_password_should_be_same_as_new_password)
+              }
+              else -> {
+                  val requestParams = HashMap<String, String>()
+                  requestParams["old_password"] = oldPassword
+                  requestParams["new_password"] = newPassword
+                  changePasswordObserver(requestParams)
+              }
+          }*/
+
+        var oldDone = false
+        var newDone = false
+        var confirmDone = false
+
+        if (oldPassword.isEmpty()) {
+            //  DriverDialog(mActivity, mActivity.getString(R.string.please_enter_old_password), true)
+            mBinding.tiledtedtTextOldPassword.error =
+                mActivity.getString(R.string.please_enter_old_password)
+        } else if (oldPassword.length < 6 || oldPassword.length > 15) {
+            mBinding.tiledtedtTextOldPassword.error =
+                mActivity.getString(R.string.password_should_be_min_6_char)
+            //DriverDialog(mActivity, mActivity.getString(R.string.old_password_validation_msg), true)
+        }
+        else{
+            oldDone =true
+        }
+        if (newPassword.isEmpty()) {
+            //  DriverDialog(mActivity, mActivity.getString(R.string.please_enter_new_password), true)
+            mBinding.tiledtedtTextNewPassword.error =
+                mActivity.getString(R.string.please_enter_new_password)
+        } else if (newPassword.length < 6 || newPassword.length > 15) {
+            mBinding.tiledtedtTextNewPassword.error =
+                mActivity.getString(R.string.password_should_be_min_6_char)
+        }else{
+            newDone =true
+        }
+        if (confirmPassword.isEmpty()) {
+            mBinding.tiledtTextConfirmPassword.error =
+                mActivity.getString(R.string.please_enter_confirm_password)
+        } else if (confirmPassword.length < 6 || confirmPassword.length > 15) {
+            mBinding.tiledtTextConfirmPassword.error =
+                mActivity.getString(R.string.password_should_be_min_6_char)
+        } else if (confirmPassword != newPassword) {
+            mBinding.tiledtTextConfirmPassword.error =
+                mActivity.getString(R.string.confirm_password_should_be_same_as_new_password)
+        }else{
+            confirmDone =true
         }
 
-        /*if(oldPassword.isEmpty()) {
-            DriverDialog(mActivity, mActivity.getString(R.string.please_enter_old_password), true)
-        } else if (oldPassword.length < 6 || oldPassword.length > 15) {
-            DriverDialog(mActivity, mActivity.getString(R.string.old_password_validation_msg), true)
-        } else if(newPassword.isEmpty()) {
-            DriverDialog(mActivity, mActivity.getString(R.string.please_enter_new_password), true)
-        } else if (newPassword.length < 6 || newPassword.length > 15) {
-            DriverDialog(mActivity, mActivity.getString(R.string.new_password_validation_msg), true)
-        } else if(confirmPassword.isEmpty()) {
-            DriverDialog(mActivity, mActivity.getString(R.string.please_enter_confirm_password), true)
-        } else if (confirmPassword.length < 6 || confirmPassword.length > 15) {
-            DriverDialog(mActivity, mActivity.getString(R.string.confirm_password_validation_msg), true)
-        } else if (confirmPassword != newPassword) {
-            DriverDialog(mActivity, mActivity.getString(R.string.confirm_password_should_be_same_as_new_password), true)
-        } else {
+        if (oldDone &&
+            newDone &&
+            confirmDone
+        ) {
             val requestParams = HashMap<String, String>()
             requestParams["old_password"] = oldPassword
             requestParams["new_password"] = newPassword
             changePasswordObserver(requestParams)
-        }*/
-    }
-
-
-    private fun changePassword(requestParams: HashMap<String, String>) = liveData(Dispatchers.Main) {
-        emit(Resource.loading(data = null))
-        try {
-            emit(Resource.success(data = baseRepository.changePassword(requestParams)))
-        } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
         }
     }
 
+
+    private fun changePassword(requestParams: HashMap<String, String>) =
+        liveData(Dispatchers.Main) {
+            emit(Resource.loading(data = null))
+            try {
+                emit(Resource.success(data = baseRepository.changePassword(requestParams)))
+            } catch (exception: Exception) {
+                emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+            }
+        }
+
     private fun changePasswordObserver(requestParams: HashMap<String, String>) {
-        changePassword(requestParams).observe(mBinding.lifecycleOwner!!, Observer{
+        changePassword(requestParams).observe(mBinding.lifecycleOwner!!, Observer {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
                         resource.data?.let { users ->
                             //if (users.status == "success") {
-                                mActivity.toast(users.message)
-                                mActivity.finish()
-                                //addressList.removeAt(deletedPosition.value!!)
-                                //addressListResponse.value = addressList
-                           /* } else {
-                                DriverDialog(mActivity, users.message, true)
-                            }*/
+                            mActivity.toast(users.message)
+                            mActivity.finish()
+                            //addressList.removeAt(deletedPosition.value!!)
+                            //addressListResponse.value = addressList
+                            /* } else {
+                                 DriverDialog(mActivity, users.message, true)
+                             }*/
                         }
                     }
 
                     Status.ERROR -> {
                         baseRepository.callback.hideProgress()
-                        if(CommonUtils.isJSONValid(it.message)){
+                        if (CommonUtils.isJSONValid(it.message)) {
                             val obj = JSONObject(it.message!!)
-                            if(obj.getInt("code") == 400){
+                            if (obj.getInt("code") == 400) {
                                 DriverDialog(mActivity, obj.getString("message"), true)
-                            }else{
-                                Toast.makeText(mActivity, obj.getString("message"), Toast.LENGTH_LONG).show()
+                            } else {
+                                Toast.makeText(
+                                    mActivity,
+                                    obj.getString("message"),
+                                    Toast.LENGTH_LONG
+                                ).show()
                             }
-                        }else{
+                        } else {
                             Toast.makeText(mActivity, it.message, Toast.LENGTH_LONG).show()
                         }
                     }

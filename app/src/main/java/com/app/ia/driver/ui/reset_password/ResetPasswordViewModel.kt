@@ -64,6 +64,75 @@ class ResetPasswordViewModel(private val baseRepository: BaseRepository) : BaseV
     fun onResetClick() {
         val newPassword = mBinding.edtTextNewPassword.text.toString()
         val confirmPassword = mBinding.edtTextConfirmPassword.text.toString()
+        mBinding.cardEdtTextConfirmPassword.error = null
+        mBinding.cardEdtTextConfirmPassword.isErrorEnabled = false
+        mBinding.cardEdtTextNewPassword.error = null
+        mBinding.cardEdtTextNewPassword.isErrorEnabled = false
+        mBinding.pinviewError.visibility = View.GONE
+
+        var hasOtp = false
+        var hasNewPassword = false
+        var hasConfirmPassword = false
+        var hasMatchPassword = false
+        /*if (mBinding.pinView.text!!.isEmpty() && newPassword.isEmpty() && confirmPassword.isEmpty()) {
+            mBinding.pinviewError.text = mActivity.getString(R.string.please_enter_otp)
+            mBinding.pinviewError.visibility = View.VISIBLE
+            mBinding.cardEdtTextNewPassword.error =
+                mActivity.getString(R.string.please_enter_new_password)
+            mBinding.cardEdtTextConfirmPassword.error =
+                mActivity.getString(R.string.enter_conform_password)
+        } else {*/
+            if (mBinding.pinView.text!!.isEmpty()) {
+                mBinding.pinviewError.text = mActivity.getString(R.string.please_enter_otp)
+                mBinding.pinviewError.visibility = View.VISIBLE
+            } else if (mBinding.pinView.text!!.toString() != otp.value!!) {
+                mBinding.pinviewError.text = mActivity.getString(R.string.please_enter_valid_otp)
+                mBinding.pinviewError.visibility = View.VISIBLE
+            } else {
+                hasOtp = true
+            }
+            if (newPassword.isEmpty()) {
+                mBinding.cardEdtTextNewPassword.error =
+                    mActivity.getString(R.string.please_enter_new_password)
+            } else if (newPassword.length < 6 || newPassword.length > 15) {
+                mBinding.cardEdtTextNewPassword.error =
+                    mActivity.getString(R.string.new_password_validation_msg)
+            } else {
+                hasNewPassword = true
+            }
+
+
+            if (confirmPassword.isEmpty()) {
+                mBinding.cardEdtTextConfirmPassword.error =
+                    mActivity.getString(R.string.enter_conform_password)
+            } else if (confirmPassword.length < 6 || confirmPassword.length > 15) {
+                mBinding.cardEdtTextConfirmPassword.error =
+                    mActivity.getString(R.string.confirm_password_validation_msg)
+            } else {
+                hasConfirmPassword = true
+            }
+
+
+            if (confirmPassword != newPassword) {
+                mBinding.cardEdtTextConfirmPassword.error =
+                    mActivity.getString(R.string.confirm_new_matched_validation_msg)
+            } else {
+                hasMatchPassword = true
+            }
+            if (hasOtp && hasNewPassword && hasConfirmPassword && hasMatchPassword) {
+                val requestParams = HashMap<String, String>()
+                requestParams["country_code"] = "+${countryCode.value!!}"
+                requestParams["phone"] = mobileNumber.value!!
+                requestParams["otp_number"] = mBinding.pinView.text.toString()
+                requestParams["new_password"] = newPassword
+                setupObservers(requestParams)
+            }
+        //}
+    }
+
+    /*fun onResetClick() {
+        val newPassword = mBinding.edtTextNewPassword.text.toString()
+        val confirmPassword = mBinding.edtTextConfirmPassword.text.toString()
         mBinding.cardEdtTextConfirmPassword.error=null
         mBinding.cardEdtTextConfirmPassword.isErrorEnabled=false
         mBinding.cardEdtTextNewPassword.error=null
@@ -102,7 +171,7 @@ class ResetPasswordViewModel(private val baseRepository: BaseRepository) : BaseV
             requestParams["new_password"] = newPassword
             setupObservers(requestParams)
         }
-    }
+    }*/
 
     private fun resetPassword(requestParams: HashMap<String, String>) = liveData(Dispatchers.Main) {
         emit(Resource.loading(data = null))
@@ -120,11 +189,11 @@ class ResetPasswordViewModel(private val baseRepository: BaseRepository) : BaseV
                     Status.SUCCESS -> {
                         resource.data?.let { users ->
                             //if (users.status == "success") {
-                                mActivity.toast(users.message)
-                                mActivity.startActivityWithFinish<LoginActivity> {
-                                    flags =
-                                        Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                }
+                            mActivity.toast(users.message)
+                            mActivity.startActivityWithFinish<LoginActivity> {
+                                flags =
+                                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                            }
                             /*} else {
                                 DriverDialog(mActivity, users.message, true)
                             }*/
@@ -132,14 +201,18 @@ class ResetPasswordViewModel(private val baseRepository: BaseRepository) : BaseV
                     }
                     Status.ERROR -> {
                         baseRepository.callback.hideProgress()
-                        if(CommonUtils.isJSONValid(it.message)){
+                        if (CommonUtils.isJSONValid(it.message)) {
                             val obj = JSONObject(it.message!!)
-                            if(obj.getInt("code") == 400){
+                            if (obj.getInt("code") == 400) {
                                 DriverDialog(mActivity, obj.getString("message"), true)
-                            }else{
-                                Toast.makeText(mActivity, obj.getString("message"), Toast.LENGTH_LONG).show()
+                            } else {
+                                Toast.makeText(
+                                    mActivity,
+                                    obj.getString("message"),
+                                    Toast.LENGTH_LONG
+                                ).show()
                             }
-                        }else{
+                        } else {
                             Toast.makeText(mActivity, it.message, Toast.LENGTH_LONG).show()
                         }
                     }

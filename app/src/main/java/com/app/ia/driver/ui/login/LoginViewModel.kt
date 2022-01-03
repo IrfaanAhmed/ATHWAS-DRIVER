@@ -76,6 +76,53 @@ class LoginViewModel(private val baseRepository: BaseRepository) : BaseViewModel
         (baseRepository.callback).hideKeyboard()
         val mobileNumber = mBinding.edtTextMobileNumber.text.toString()
         val password = mBinding.edtTextPassword.text.toString()
+        var donePhone = false
+
+        mBinding.cardViewMobile.error = null
+        mBinding.cardViewMobile.isErrorEnabled = false
+        mBinding.cardViewPassword.error = null
+        mBinding.cardViewPassword.isErrorEnabled = false
+
+        if (mobileNumber.isEmpty() && password.isEmpty()) {
+            mBinding.cardViewMobile.error =
+                mActivity.getString(R.string.please_enter_email_or_mobile_number)
+            mBinding.cardViewPassword.error = mActivity.getString(R.string.enter_password)
+
+        } else {
+            if (isValidPhoneNumber(mobileNumber)) {
+                if (mobileNumber.length < 7 || mobileNumber.length > 15) {
+                    mBinding.cardViewMobile.error =
+                        mActivity.getString(R.string.mobile_number_validation_msg)
+                } else {
+                    donePhone = true
+                }
+            } else {
+                if (!CommonUtils.isEmailValid(mobileNumber)) {
+                    mBinding.cardViewMobile.error =
+                        mActivity.getString(R.string.enter_valid_email_address)
+                } else {
+                    donePhone = true
+                }
+            }
+
+            if (password.isEmpty()) {
+                mBinding.cardViewPassword.error = mActivity.getString(R.string.enter_password)
+            } else if (password.length < 6 || password.length > 15) {
+
+                mBinding.cardViewPassword.error =
+                    mActivity.getString(R.string.password_validation_msg)
+            } else {
+                if (donePhone) {
+                    submitLoginCredential(mobileNumber, password)
+                }
+            }
+        }
+    }
+
+    /*  fun onLoginClick() {
+        (baseRepository.callback).hideKeyboard()
+        val mobileNumber = mBinding.edtTextMobileNumber.text.toString()
+        val password = mBinding.edtTextPassword.text.toString()
 
         mBinding.cardViewMobile.error=null
         mBinding.cardViewMobile.isErrorEnabled=false
@@ -110,7 +157,7 @@ class LoginViewModel(private val baseRepository: BaseRepository) : BaseViewModel
                 submitLoginCredential(mobileNumber, password)
             }
         }
-    }
+    }*/
 
     private fun isValidPhoneNumber(phoneNumber: CharSequence): Boolean {
         return if (!TextUtils.isEmpty(phoneNumber)) {
