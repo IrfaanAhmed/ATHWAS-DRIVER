@@ -74,21 +74,54 @@ class HomeMainViewModel(private val baseRepository: BaseRepository) : BaseViewMo
         val tivoDialog = DriverDialog(mActivity, mActivity.getString(R.string.logout_alert), false)
         tivoDialog.setOnItemClickListener(object : DriverDialog.OnClickListener {
             override fun onPositiveClick() {
-                /*val request = HashMap<String, String>()
-                request["device_token"] = AppPreferencesHelper.getInstance().deviceToken
-                request["device_type"] = "android"*/
-                //mActivity.toast(users.message)
-                AppPreferencesHelper.getInstance().clearAllPreferences()
+                logoutObserver(HashMap())
+                /*AppPreferencesHelper.getInstance().clearAllPreferences()
                 AppPreferencesHelper.getInstance().authToken = ""
                 mActivity.startActivityWithFinish<LoginActivity> {
                     flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                }
+                }*/
             }
 
             override fun onNegativeClick() {
             }
 
         })
+    }
+    fun logout(params: HashMap<String, String>) = liveData(Dispatchers.Main) {
+        emit(Resource.loading(data = null))
+        try {
+            emit(Resource.success(data = baseRepository.logout(params)))
+        } catch (exception: Exception) {
+            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+        }
+    }
+
+    fun logoutObserver(params: HashMap<String, String>) {
+        logout(params).observe(mBinding.lifecycleOwner!!) {
+            it?.let { resource ->
+                when (resource.status) {
+                    Status.SUCCESS -> {
+                        resource.data?.let { users ->
+                            AppPreferencesHelper.getInstance().clearAllPreferences()
+                            AppPreferencesHelper.getInstance().authToken = ""
+                            mActivity.startActivityWithFinish<LoginActivity> {
+                                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                            }
+                        }
+                    }
+
+                    Status.ERROR -> {
+                        baseRepository.callback.hideProgress()
+                        if (!it.message.isNullOrEmpty()) {
+                        }
+                    }
+
+                    Status.LOADING -> {
+                        baseRepository.callback.showProgress()
+                    }
+                }
+            }
+        }
     }
 
     private fun changeOnlineStatus(requestParams: HashMap<String, String>) = liveData(Dispatchers.Main) {
@@ -149,16 +182,18 @@ class HomeMainViewModel(private val baseRepository: BaseRepository) : BaseViewMo
 
     private fun notificationCountObserver() {
 
-        getNotificationCount().observe(mBinding.lifecycleOwner!!, {
+        getNotificationCount().observe(mBinding.lifecycleOwner!!) {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
                         resource.data?.let { users ->
-                            AppPreferencesHelper.getInstance().notificationCount = users.data?.notificationCount!!
-                            if(AppPreferencesHelper.getInstance().notificationCount > 0){
-                                (mActivity as HomeActivity).showNotificationBadge(AppPreferencesHelper.getInstance().notificationCount)
-                            }
-                            else{
+                            AppPreferencesHelper.getInstance().notificationCount =
+                                users.data?.notificationCount!!
+                            if (AppPreferencesHelper.getInstance().notificationCount > 0) {
+                                (mActivity as HomeActivity).showNotificationBadge(
+                                    AppPreferencesHelper.getInstance().notificationCount
+                                )
+                            } else {
                                 (mActivity as HomeActivity).removeNotificationBadge()
                             }
 
@@ -177,7 +212,7 @@ class HomeMainViewModel(private val baseRepository: BaseRepository) : BaseViewMo
                     }
                 }
             }
-        })
+        }
     }
 
 }

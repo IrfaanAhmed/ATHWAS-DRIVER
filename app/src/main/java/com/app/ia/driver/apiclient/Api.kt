@@ -30,6 +30,7 @@ object Api {
     const val UPDATE_ORDER_STATUS = COMMON_PATH + "order/update_order_status/{order_id}" //PUT
     const val LOCATION_UPDATE_URL = COMMON_PATH + "profile/update_location"
     const val GET_NOTIFICATION_COUNT = COMMON_PATH + "notifications/get_notification_count"
+    const val LOGOUT = COMMON_PATH + "logout"
 
     private fun getBaseUrl(environmentType: Int): String {
 

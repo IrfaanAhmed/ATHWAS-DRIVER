@@ -77,4 +77,8 @@ interface ApiService {
 
     @GET(Api.GET_NOTIFICATION_COUNT)
     suspend fun getNotificationCount(): Response<BaseResponse<NotificationCountResponse>>
+
+    @POST(Api.LOGOUT)
+    @FormUrlEncoded
+    suspend fun logout(@FieldMap params: Map<String, String>): Response<BaseResponse<Any>>
 }

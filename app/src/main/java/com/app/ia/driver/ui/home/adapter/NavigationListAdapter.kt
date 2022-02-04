@@ -6,11 +6,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.app.ia.driver.R
+import com.app.ia.driver.base.BaseActivity
 import com.app.ia.driver.databinding.SideMenuListItemBinding
 import com.app.ia.driver.dialog.DriverDialog
 import com.app.ia.driver.local.AppPreferencesHelper
 import com.app.ia.driver.ui.contact_us.ContactUsActivity
 import com.app.ia.driver.ui.home.HomeActivity
+import com.app.ia.driver.ui.home.HomeMainViewModel
 import com.app.ia.driver.ui.order_history.OrderHistoryActivity
 import com.app.ia.driver.ui.order_stats.OrderStatsActivity
 import com.app.ia.driver.ui.static_page.StaticPageActivity

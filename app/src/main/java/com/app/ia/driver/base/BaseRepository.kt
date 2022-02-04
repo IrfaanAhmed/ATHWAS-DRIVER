@@ -87,4 +87,8 @@ open class BaseRepository(private val myApi: ApiService, generalCallback: Genera
         return apiRequest { myApi.getNotificationCount() }
     }
 
+    suspend fun logout(request: Map<String, String>): BaseResponse<Any> {
+        return apiRequest { myApi.logout(request) }
+    }
+
 }

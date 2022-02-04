@@ -36,6 +36,11 @@ android {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
     }
+    packagingOptions {
+        resources {
+            excludes += ['META-INF/*.kotlin_module']
+        }
+    }
 
     android.applicationVariants.all { variant ->
         variant.outputs.all {
@@ -44,9 +49,6 @@ android {
         }
     }
 
-    packagingOptions {
-        exclude("META-INF/*.kotlin_module")
-    }
 }
 
 static def getDate() {
