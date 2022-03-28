@@ -13,14 +13,17 @@
         <entry key="..\:/Android/Projects/IADriver/app/src/main/res/layout/order_detail_list_row.xml" value="0.19791666666666666" />
         <entry key="..\:/Android/Projects/IADriver/app/src/main/res/layout/order_list_item.xml" value="0.19791666666666666" />
         <entry key="..\:/Android/Projects/IADriver/app/src/main/res/menu/navigation_menu.xml" value="0.19427083333333334" />
+        <entry key="..\:/AndroidProjects/IADriver/app/src/main/res/layout/activity_home.xml" value="0.27708333333333335" />
         <entry key="..\:/AndroidProjects/IADriver/app/src/main/res/layout/activity_order_detail.xml" value="0.21354166666666666" />
-        <entry key="..\:/AndroidProjects/IADriver/app/src/main/res/layout/fragment_my_order.xml" value="0.20520833333333333" />
+        <entry key="..\:/AndroidProjects/IADriver/app/src/main/res/layout/fragment_my_order.xml" value="0.5" />
         <entry key="..\:/AndroidProjects/IADriver/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
         <entry key="..\:/AndroidProjects/IADriver/app/src/main/res/layout/image_picker_dialog.xml" value="0.14895833333333333" />
         <entry key="..\:/AndroidProjects/IADriver/app/src/main/res/layout/layout_dialog.xml" value="0.16354166666666667" />
+        <entry key="..\:/AndroidProjects/IADriver/app/src/main/res/layout/layout_progress.xml" value="0.17889492753623187" />
         <entry key="..\:/AndroidProjects/IADriver/app/src/main/res/layout/nav_side_menu.xml" value="0.21739130434782608" />
         <entry key="..\:/AndroidProjects/IADriver/app/src/main/res/layout/order_detail_list_item.xml" value="0.276268115942029" />
         <entry key="..\:/AndroidProjects/IADriver/app/src/main/res/layout/order_detail_list_row.xml" value="0.276268115942029" />
+        <entry key="..\:/AndroidProjects/IADriver/app/src/main/res/layout/toolbar_home.xml" value="0.27708333333333335" />
         <entry key="..\:/Iftekhar/Android Projects/athwas-driver-app/app/src/main/res/drawable/edittext_bg.xml" value="0.2953703703703704" />
         <entry key="..\:/Iftekhar/Android Projects/athwas-driver-app/app/src/main/res/drawable/edittext_bottom_bg.xml" value="0.2935185185185185" />
         <entry key="..\:/Iftekhar/Android Projects/athwas-driver-app/app/src/main/res/layout/activity_change_password.xml" value="0.25" />

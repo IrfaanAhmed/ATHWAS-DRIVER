@@ -33,6 +33,9 @@ data class OrderDetailResponse(
     @SerializedName("order_id")
     var orderId: String,
     @Expose
+    @SerializedName("redeem_points")
+    private var redeemPoints: String?,
+    @Expose
     @SerializedName("userData")
     var userdata: Userdata,
     @Expose
@@ -103,6 +106,10 @@ data class OrderDetailResponse(
             number = customerPhone.redact()
         }
         return number
+    }
+
+    fun getRedeemPoints(): String {
+        return CommonUtils.convertToDecimal(redeemPoints)
     }
 
     fun getNetAmount(): String {
@@ -328,13 +335,13 @@ data class OrderDetailResponse(
             var quantity: Int,
             @Expose
             @SerializedName("price")
-            var price: String,
+            private var price: String,
             @Expose
             @SerializedName("is_discount")
             var isDiscount: Int,
             @Expose
             @SerializedName("offer_price")
-            val offerPrice: String,
+            private val offerPrice: String,
             @Expose
             @SerializedName("order_status")
             var orderStatus: Int,
@@ -344,9 +351,13 @@ data class OrderDetailResponse(
             @Expose
             @SerializedName("CategoryData")
             var category: CategoryName): Serializable{
-            @JvmName("price")
+
             fun getPrice(): String {
                 return CommonUtils.convertToDecimal(price)
+            }
+
+            fun getOfferPrice(): String {
+                return CommonUtils.convertToDecimal(offerPrice)
             }
         }
 

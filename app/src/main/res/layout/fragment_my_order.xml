@@ -168,11 +168,11 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/no_item_available"
-            android:textSize="@dimen/_10sdp"
-            android:fontFamily="@font/linotte_semi_bold"
             android:layout_centerInParent="true"
-            android:visibility="@{viewModel.isItemAvailable ? View.GONE : View.VISIBLE}"/>
+            android:fontFamily="@font/linotte_semi_bold"
+            android:text="@string/no_order_assigned_yet"
+            android:textSize="@dimen/_10sdp"
+            android:visibility="@{viewModel.isItemAvailable ? View.GONE : View.VISIBLE}" />
 
 
     </RelativeLayout>

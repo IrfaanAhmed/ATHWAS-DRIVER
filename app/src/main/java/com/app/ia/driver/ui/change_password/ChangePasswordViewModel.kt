@@ -1,6 +1,8 @@
 package com.app.ia.driver.ui.change_password
 
 import android.app.Activity
+import android.os.Handler
+import android.os.Looper
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.liveData
@@ -148,7 +150,8 @@ class ChangePasswordViewModel(private val baseRepository: BaseRepository) : Base
                         resource.data?.let { users ->
                             //if (users.status == "success") {
                             mActivity.toast(users.message)
-                            mActivity.finish()
+
+                            Handler(Looper.getMainLooper()).postDelayed({onBackPressed()}, 1000)
                             //addressList.removeAt(deletedPosition.value!!)
                             //addressListResponse.value = addressList
                             /* } else {

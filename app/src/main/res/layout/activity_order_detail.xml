@@ -313,7 +313,7 @@
                             android:id="@+id/txtViewDeliveryFee"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{viewModel.orderDetailResponse.deliveryFee != null ? @string/inr_price(viewModel.orderDetailResponse.deliveryFee) : @string/inr_price(`0`)}"
+                            android:text="@{viewModel.orderDetailResponse.deliveryFee != null ? @string/inr_price(CommonUtils.convertToDecimal(viewModel.orderDetailResponse.deliveryFee)) : @string/inr_price(`0.00`)}"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_12sdp" />
 
@@ -342,7 +342,35 @@
                             android:id="@+id/txtViewTax"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{viewModel.orderDetailResponse.vat_amount != null ? @string/inr_price(viewModel.orderDetailResponse.vat_amount) : @string/inr_price(`0`)}"
+                            android:text="@{viewModel.orderDetailResponse.vat_amount != null ? @string/inr_price(CommonUtils.convertToDecimal(viewModel.orderDetailResponse.vat_amount)) : @string/inr_price(`0.00`)}"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:visibility="@{viewModel.orderDetailResponse.getRedeemPoints() == `0` ? View.VISIBLE : View.VISIBLE}"
+                        android:paddingBottom="5dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Used Reward Points"
+                            android:textAlignment="viewStart"
+                            android:textColor="@color/dark_grey"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{viewModel.orderDetailResponse.getRedeemPoints()}"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_12sdp" />
 
@@ -378,7 +406,7 @@
                             android:id="@+id/textViewTotalAmount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{viewModel.orderDetailResponse.netAmount != null ? @string/inr_price(viewModel.orderDetailResponse.netAmount) : @string/inr_price(`0`)}"
+                            android:text="@{viewModel.orderDetailResponse.netAmount != null ? @string/inr_price(CommonUtils.convertToDecimal(viewModel.orderDetailResponse.netAmount)) : @string/inr_price(`0.00`)}"
                             android:textAllCaps="true"
                             android:textColor="@color/colorPrimary"
                             android:textSize="@dimen/_12sdp"

@@ -16,6 +16,7 @@
     <string name="search_by_keywords">Search by keywords</string>
     <string name="what_are_looking_for">What are you looking for?</string>
     <string name="shop_by_category">Shop by Category</string>
+    <string name="no_order_assigned_yet">No Orders Assigned yet</string>
     <string name="no_item_available">No Data Found!!</string>
     <string name="out_of_stock">Out of Stock</string>
     <string name="add_to_cart">Add to Cart</string>
