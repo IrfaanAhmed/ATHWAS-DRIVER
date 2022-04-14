@@ -84,7 +84,7 @@
     <string name="new_password">New Password</string>
     <string name="confirm_new_password">Confirm New Password</string>
     <string name="submit">Submit</string>
-    <string name="favourite_product">Favourite Products</string>
+    <string name="favourite_product">Favorite Products</string>
     <string name="done">Done</string>
     <string name="size_value">Size: %s</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -165,7 +165,7 @@
     <string name="password_should_be_min_6_char">Password must be 6 to 20 characters.</string>
     <string name="invalid_password_format">No spaces allowed in password</string>
     <string name="confirm_password_should_be_same_as_new_password">Confirm Password should be same as new password.</string>
-    <string name="otp_sent_on_mobile_or_email">OTP has been sent to your mobile number or email address.Please verify</string>
+    <string name="otp_sent_on_mobile_or_email">OTP has been sent to your mobile number or email address. Please verify</string>
     <string name="verify">Verify</string>
     <string name="delete">Delete</string>
     <string name="are_you_sure_want_to_delete_notification">Are you sure you want to delete notification?</string>
