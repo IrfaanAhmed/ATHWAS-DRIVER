@@ -1,14 +1,13 @@
 package com.app.ia.driver.utils
 
 import android.text.TextUtils
-import android.util.Log
 import android.util.Patterns
 import java.util.regex.Pattern
 
 
 class ValidationUtils{
     companion object {
-        fun isValidEmail(target: CharSequence): Boolean {
+       /* fun isValidEmail(target: CharSequence): Boolean {
             var prefix = false
             Log.d("Email", "${target.indexOf("@", 0, true)}")
             if(target.indexOf("@", 0, true) > 2  || target.indexOf("@", 0, true) <= 65){
@@ -24,6 +23,25 @@ class ValidationUtils{
                 postfix = true
             }
             return prefix && postfix && Patterns.EMAIL_ADDRESS.matcher(target).matches()
+        }*/
+        fun isValidNumber(target: String) : Boolean{
+            return if (target.isNullOrEmpty()) false else target.all { Character.isDigit(it) }
+
+        }
+
+        fun isValidEmailId(email: String?): Boolean {
+            return Pattern.compile(
+                "^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
+                        + "((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                        + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."
+                        + "([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                        + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
+                        + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{3,4})$"
+            ).matcher(email).matches()
+        }
+
+        fun isValidEmail(target: CharSequence): Boolean {
+            return !TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches()
         }
 
         fun isValidPhone(phone: CharSequence): Boolean {

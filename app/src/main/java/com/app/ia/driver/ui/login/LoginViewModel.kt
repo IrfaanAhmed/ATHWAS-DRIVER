@@ -107,7 +107,7 @@ class LoginViewModel(private val baseRepository: BaseRepository) : BaseViewModel
 
             if (password.isEmpty()) {
                 mBinding.cardViewPassword.error = mActivity.getString(R.string.enter_password)
-            } else if (password.length < 6 || password.length > 15) {
+            } else if (password.length < 6 || password.length > 20) {
 
                 mBinding.cardViewPassword.error =
                     mActivity.getString(R.string.password_validation_msg)

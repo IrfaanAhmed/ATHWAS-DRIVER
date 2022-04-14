@@ -42,7 +42,7 @@ class ForgotPasswordViewModel(private val baseRepository: BaseRepository) : Base
     fun onSendClick(){
        // mActivity.startActivity<ResetPasswordActivity>()
         (baseRepository.callback).hideKeyboard()
-        val mobileNumber = mBinding.edtTextMobileNumber.text.toString()
+        val mobileNumber = mBinding.edtTextMobileNumber.text.toString().trim()
         mBinding.cardViewMobile.error=null
         mBinding.cardViewMobile.isErrorEnabled=false
         if(mobileNumber.isEmpty()){
@@ -62,7 +62,7 @@ class ForgotPasswordViewModel(private val baseRepository: BaseRepository) : Base
             }
 
         } else {
-            if(!CommonUtils.isEmailValid(mobileNumber)){
+            if(!ValidationUtils.isValidEmailId(mBinding.edtTextMobileNumber.text.toString().trim())){
 //                DriverDialog(mActivity, mActivity.getString(R.string.enter_valid_email_address), true)
                 mBinding.cardViewMobile.error=mActivity.getString(R.string.enter_valid_email_address)
             }else{
@@ -76,7 +76,7 @@ class ForgotPasswordViewModel(private val baseRepository: BaseRepository) : Base
     private fun isValidPhoneNumber(phoneNumber: CharSequence): Boolean {
         return if (!TextUtils.isEmpty(phoneNumber)) {
             Patterns.PHONE.matcher(phoneNumber).matches()
-        } else false
+        } else phoneNumber.all { Character.isDigit(it) }
     }
 
     private fun validateNumber(countryCode: String, phNumber: String): Boolean {

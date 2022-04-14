@@ -141,6 +141,8 @@ class OrderDetailViewModel(private val baseRepository: BaseRepository) : BaseVie
                         isLoading = false
                         resource.data?.let { users ->
                             orderDetailResponse.value = users.data!![0]
+                            mBinding.textOrderId.text = users.data!![0].orderId
+                            mBinding.textPaymentAmt.text = users.data!![0].getNetAmount()
 
                             totalAmount.value = 0.0
                             offerAmount.value = 0.0

@@ -89,7 +89,7 @@ class ChangePasswordViewModel(private val baseRepository: BaseRepository) : Base
             //  DriverDialog(mActivity, mActivity.getString(R.string.please_enter_old_password), true)
             mBinding.tiledtedtTextOldPassword.error =
                 mActivity.getString(R.string.please_enter_old_password)
-        } else if (oldPassword.length < 6 || oldPassword.length > 15) {
+        } else if (oldPassword.length < 6 || oldPassword.length > 20) {
             mBinding.tiledtedtTextOldPassword.error =
                 mActivity.getString(R.string.password_should_be_min_6_char)
             //DriverDialog(mActivity, mActivity.getString(R.string.old_password_validation_msg), true)
@@ -101,7 +101,7 @@ class ChangePasswordViewModel(private val baseRepository: BaseRepository) : Base
             //  DriverDialog(mActivity, mActivity.getString(R.string.please_enter_new_password), true)
             mBinding.tiledtedtTextNewPassword.error =
                 mActivity.getString(R.string.please_enter_new_password)
-        } else if (newPassword.length < 6 || newPassword.length > 15) {
+        } else if (newPassword.length < 6 || newPassword.length > 20) {
             mBinding.tiledtedtTextNewPassword.error =
                 mActivity.getString(R.string.password_should_be_min_6_char)
         }else{
@@ -110,7 +110,7 @@ class ChangePasswordViewModel(private val baseRepository: BaseRepository) : Base
         if (confirmPassword.isEmpty()) {
             mBinding.tiledtTextConfirmPassword.error =
                 mActivity.getString(R.string.please_enter_confirm_password)
-        } else if (confirmPassword.length < 6 || confirmPassword.length > 15) {
+        } else if (confirmPassword.length < 6 || confirmPassword.length > 20) {
             mBinding.tiledtTextConfirmPassword.error =
                 mActivity.getString(R.string.password_should_be_min_6_char)
         } else if (confirmPassword != newPassword) {

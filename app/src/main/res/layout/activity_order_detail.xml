@@ -70,11 +70,12 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textOrderId"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_5sdp"
                         android:fontFamily="@font/linotte_bold"
-                        android:text="@{`#`+ viewModel.orderDetailResponse.orderId}"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="@dimen/_11sdp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -148,9 +149,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:id="@+id/textPaymentAmt"
                             android:layout_marginStart="@dimen/_5sdp"
                             android:fontFamily="@font/linotte_bold"
-                            android:text="@{`₹`+ viewModel.orderDetailResponse.netAmount}"
+                            android:text=""
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="@dimen/_11sdp" />
 
@@ -355,8 +357,8 @@
                         android:layout_marginEnd="8dp"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
-                        android:visibility="@{viewModel.orderDetailResponse.getRedeemPoints() == `0` ? View.VISIBLE : View.VISIBLE}"
-                        android:paddingBottom="5dp">
+                        android:paddingBottom="5dp"
+                        android:visibility="@{viewModel.orderDetailResponse.getRedeemPoints() == `0` ? View.VISIBLE : View.VISIBLE}">
 
                         <TextView
                             android:layout_width="0dp"
